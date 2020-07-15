@@ -17,7 +17,8 @@ def downAndSave(url,header,retry_time=3):
         video_url = 'https:'+re.findall(re1,res.text)[0]
 
         res_video = requests.get(video_url,headers=header)
-        video_name = re.findall('BV.{10}',url)[0]+'.mp4'
+        title = re.findall('<title.*?>(.*?)</title>',res.text)[0]
+        video_name = title+re.findall('BV.{10}',url)[0]+'.mp4'
         with open(video_name, 'wb') as f:
             f.write(res_video.content)
             print("下载成功")

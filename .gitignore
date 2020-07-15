@@ -1,5 +1,6 @@
-#videos
+#videos and htmls
 *.mp4
+*.html
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
