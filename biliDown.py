@@ -2,7 +2,7 @@ import requests
 import re
 import pyperclip
 
-def downAndSave(url,header,retry_time=3):
+def downAndSave(url,header,retry_time=5):
     try:
         if retry_time == 0:
             raise Exception("")
@@ -18,8 +18,8 @@ def downAndSave(url,header,retry_time=3):
 
         res_video = requests.get(video_url,headers=header)
         title = re.findall('<title.*?>(.*?)</title>',res.text)[0]
-        video_name = title+re.findall('BV.{10}',url)[0]+'.mp4'
-        with open(video_name, 'wb') as f:
+        save_name = legalfySaveName(title+re.findall('BV.{10}',url)[0]+'.mp4')
+        with open(save_name, 'wb') as f:
             f.write(res_video.content)
             print("下载成功")
     except:
@@ -28,6 +28,14 @@ def downAndSave(url,header,retry_time=3):
         else:
             print("下载失败")
 
+def legalfySaveName(img_title):
+    purified_zifr = ''
+    for zifu in img_title:
+        if zifu not in ['\\','+','\"','*','/','?','<','>','|',':']:
+            purified_zifr =  purified_zifr+zifu
+        else:
+            purified_zifr =  purified_zifr+'-'
+    return purified_zifr
 
 def main():
     header_mobile = {'User-Agent':'Mozilla/5.0 (Linux; Android 7.0; SM-G892A Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/67.0.3396.87 Mobile Safari/537.36'}
