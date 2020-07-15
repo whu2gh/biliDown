@@ -1,5 +1,6 @@
 import requests
 import re
+import pyperclip
 
 def downAndSave(url,header,retry_time=3):
     try:
@@ -29,7 +30,7 @@ def downAndSave(url,header,retry_time=3):
 
 def main():
     header_mobile = {'User-Agent':'Mozilla/5.0 (Linux; Android 7.0; SM-G892A Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/67.0.3396.87 Mobile Safari/537.36'}
-    url = 'https://www.bilibili.com/video/BV1NT4y1E7ya?spm_id_from=333.5.b_686967685f656e65726779.3'
+    url = pyperclip.paste()
     downAndSave(url,header_mobile)
 
 if __name__ == __name__:
