@@ -14,7 +14,7 @@ def downAndSave(url,header,retry_time=5):
         if res.status_code != 200:
             downAndSave(url,header,retry_time-1)
         re1 = 'readyVideoUrl.*?\'(.*?)\\\''
-        video_url = 'https:'+re.findall(re1,res.text)[0]
+        video_url = re.findall(re1,res.text)[0]
 
         res_video = requests.get(video_url,headers=header)
         title = re.findall('<title.*?>(.*?)</title>',res.text)[0]
